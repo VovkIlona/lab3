@@ -19,26 +19,19 @@ public class LampsManager {
 		this.lamps = lamps;
 	}
 	 public List<Lamps> sortByPrice(boolean descending) {
-	        Comparator<Lamps> comparator = (Lamps obj1, Lamps obj2) ->
-	                Double.compare((obj1.getPrice()), (obj2.getPrice()));
-	        List<Lamps> lampsList = lamps;
-	        lampsList.sort(comparator);
-	        if (descending) {
-	            Collections.reverse(lampsList);
-	        }
-	        return lampsList;
-	    }
+		Comparator<Lamps> comparator = descending ? Comparator.comparing(Lamps::getPrice).reversed()
+				: Comparator.comparing(Lamps::getPrice);
 
-	    public List<Lamps> sortByHeight(boolean descending) {
-	        Comparator<Lamps> comparator = (Lamps obj1, Lamps obj2) ->
-	                Double.compare((obj1.getHeight()), (obj2.getHeight()));
-	        List<Lamps> lampsList = lamps;
-	        lampsList.sort(comparator);
-	        if (descending) {
-	            Collections.reverse(lampsList);
-	        }
-	        return lampsList;
-	    }
+		lamps.sort(comparator);
+		return lamps;
+	}
+
+	public List<Lamps> sortByHeight(boolean descending) {
+		Comparator<Lamps> comparator = descending ? Comparator.comparing(Lamps::getHeight).reversed()
+				: Comparator.comparing(Lamps::getHeight);
+		lamps.sort(comparator);
+		return lamps;
+	}
  
 	    public List<Lamps> findType(LightSourceType type) {
 	        List<Lamps> lampsList = lamps;
